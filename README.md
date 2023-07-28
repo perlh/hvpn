@@ -1,9 +1,10 @@
 # tunvitor
+A simple tun VPN and ss tunnel, tun uses udp as the tunnel.
 ## install
 ``` bash
-git clone xxx.git
+git clone https://github.com/perlh/tunvitor.git
 cd tunvitor
-go build
+make
 ```
 ## deploy
 ### client
@@ -22,3 +23,4 @@ sudo ./tunvitor -s \ server mode
     -ltun "0.0.0.0:30000" \ tun listen port
     -subnet "192.168.123.1/24" \ tun local vpn address
 ```
+
