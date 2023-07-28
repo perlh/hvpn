@@ -45,8 +45,8 @@ func main() {
 	flag.BoolVar(&clientMode, "c", false, "client mode")
 	flag.BoolVar(&serverMode, "s", false, "server mode")
 	flag.StringVar(&appConfig.socks, "socks", "0.0.0.0:1080", "socks -> client ip")
-	flag.StringVar(&appConfig.remoteServer, "server", "222.204.52.222:9000", "listen ss server")
-	flag.StringVar(&appConfig.server, "remote_server", "0.0.0.0:9000", "client -> server ip")
+	flag.StringVar(&appConfig.remoteServer, "remote_server", "222.204.52.222:9000", "listen ss server")
+	flag.StringVar(&appConfig.server, "server", "0.0.0.0:9000", "client -> server ip")
 	flag.StringVar(&appConfig.ltun, "ltun", "0.0.0.0:30000", "local tun ip")
 	flag.StringVar(&appConfig.stun, "stun", "222.204.52.222:30000", "remote/server tun ip")
 	flag.StringVar(&appConfig.subnet, "subnet", "192.168.123.1/24", "vpn subnet")
@@ -54,6 +54,7 @@ func main() {
 	if clientMode == true && serverMode == false {
 		socks.UDPEnabled = true
 		log.Println("run mode: client")
+		log.Println(appConfig.stun)
 		go socksLocal(appConfig.socks, appConfig.remoteServer)
 		go udpSocksLocal(appConfig.socks, appConfig.remoteServer)
 		go StartUDPClient(appConfig.subnet, appConfig.stun, appConfig.ltun)
@@ -67,12 +68,6 @@ func main() {
 		flag.PrintDefaults()
 		os.Exit(0)
 	}
-	//laddr := "0.0.0.0:1080"
-	//server := "0.0.0.0:9000"
-	//vpnLocalServer := "0.0.0.0:30000"
-	//vpnRemoteServer := "222.204.52.222:30000"
-	//clientSubnet := "192.168.123.2/24"
-	//serverSubnet := "192.168.123.1/24"
 	if clientMode == true {
 
 	} else {
